@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+import bcryptjs from 'bcryptjs';
 
 const { Schema } = mongoose;
 
@@ -29,6 +30,7 @@ const UserSchema = new Schema({
   updatedAt: { type: Number, default: null },
   deletedAt: { type: Number, default: null }
 });
+
 UserSchema.statics = {
   createNew(item) {
     return this.create(item);
@@ -49,6 +51,16 @@ UserSchema.statics = {
       },
       { 'local.isActive': true, 'local.verifyToken': null }
     ).exec();
+  },
+  findUserById(id) {
+    return this.findById(id).exec;
   }
 };
+
+UserSchema.methods = {
+  comparePassword(password) {
+    return bcryptjs.compare(password, this.local.password);
+  }
+};
+
 module.exports = mongoose.model('user', UserSchema);
