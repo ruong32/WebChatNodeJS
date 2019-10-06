@@ -1,26 +1,28 @@
 import express from "express";
 import ConnectDB from "./config/connectDB";
-import ContactModel from "./models/contact.model"
+import ConfigViewEngine from "./config/viewEngine";
+import initRoutes from "./routes/web";
+import bodyParser from "body-parser";
+import morgan from "morgan";
+import connectFlash from "connect-flash";
+import configSession from "./config/session";
 
 let app = express();
 
+app.use(morgan('dev'));
+
 ConnectDB();
 
-let hostname = "localhost";
-let port = 3299;
+configSession(app);
 
-app.get("/hello", async (req, res) => {
-    try {
-        let item = {
-            userId: "17020996",
-            contactId: "321999"
-        };
-        let contact = await ContactModel.createNew(item)
-    } catch (error) {
-        console.log(error)
-    }
-    res.send("<h1>From server with love!!!</h1>")
-});
+ConfigViewEngine(app);
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: true}));
+
+app.use(connectFlash());
+
+initRoutes(app);
 
 app.listen(process.env.APP_PORT, process.env.APP_HOST, () => {
     console.log(`Server is running at ${process.env.APP_HOST} on ${process.env.APP_PORT}!`);
