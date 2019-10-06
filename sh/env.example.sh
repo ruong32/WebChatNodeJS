@@ -7,3 +7,8 @@ export DB_PASSWORD=***
 
 export APP_HOST=***
 export APP_PORT=***
+
+export MAIL_USER=***
+export MAIL_PASSWORD=***
+export MAIL_HOST=***
+export MAIL_PORT=***
