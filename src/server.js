@@ -1,13 +1,13 @@
-import express from "express";
-import ConnectDB from "./config/connectDB";
-import ConfigViewEngine from "./config/viewEngine";
-import initRoutes from "./routes/web";
-import bodyParser from "body-parser";
-import morgan from "morgan";
-import connectFlash from "connect-flash";
-import configSession from "./config/session";
+import express from 'express';
+import bodyParser from 'body-parser';
+import morgan from 'morgan';
+import connectFlash from 'connect-flash';
+import ConnectDB from './config/connectDB';
+import ConfigViewEngine from './config/viewEngine';
+import initRoutes from './routes/web';
+import configSession from './config/session';
 
-let app = express();
+const app = express();
 
 app.use(morgan('dev'));
 
@@ -18,12 +18,14 @@ configSession(app);
 ConfigViewEngine(app);
 
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(connectFlash());
 
 initRoutes(app);
 
 app.listen(process.env.APP_PORT, process.env.APP_HOST, () => {
-    console.log(`Server is running at ${process.env.APP_HOST} on ${process.env.APP_PORT}!`);
+  console.log(
+    `Server is running at ${process.env.APP_HOST} on ${process.env.APP_PORT}!`
+  );
 });
