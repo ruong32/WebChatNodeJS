@@ -1,7 +1,7 @@
 const getHome = (req, res) => {
-    return res.render("main/home/home");
+  return res.render('main/home/home');
 };
 
 module.exports = {
-    getHome: getHome
+  getHome: getHome
 };
