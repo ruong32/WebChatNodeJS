@@ -22,8 +22,16 @@ function nineScrollRight() {
   $('.right .chat').scrollTop($('.right .chat')[0].scrollHeight);
 }
 
+function flashMasterNotify() {
+  const notify = $('.master-success-message').text();
+  if (notify.length) {
+    console.log(`ruong 123 ruong 123`);
+    alertify.notify(notify, 'success', 7);
+  }
+}
+
 function enableEmojioneArea(chatId) {
-  $('.write-chat[data-chat="' + chatId + '"]').emojioneArea({
+  $(`.write-chat[data-chat="${chatId}"]`).emojioneArea({
     standalone: false,
     pickerPosition: 'top',
     filtersPosition: 'bottom',
@@ -37,7 +45,7 @@ function enableEmojioneArea(chatId) {
       keyup: function(editor, event) {
         $('.write-chat').val(this.getText());
       }
-    },
+    }
   });
   $('.icon-chat').bind('click', function(event) {
     event.preventDefault();
@@ -66,7 +74,9 @@ function ajaxLoading() {
 
 function showModalContacts() {
   $('#show-modal-contacts').click(function() {
-    $(this).find('.noti_contact_counter').fadeOut('slow');
+    $(this)
+      .find('.noti_contact_counter')
+      .fadeOut('slow');
   });
 }
 
@@ -82,25 +92,29 @@ function configNotification() {
 }
 
 function gridPhotos(layoutNumber) {
-  let countRows = Math.ceil($('#imagesModal').find('div.all-images>img').length / layoutNumber);
-  let layoutStr = new Array(countRows).fill(layoutNumber).join("");
-  $('#imagesModal').find('div.all-images').photosetGrid({
-    highresLinks: true,
-    rel: 'withhearts-gallery',
-    gutter: '2px',
-    layout: layoutStr,
-    onComplete: function() {
-      $('.all-images').css({
-        'visibility': 'visible'
-      });
-      $('.all-images a').colorbox({
-        photo: true,
-        scalePhotos: true,
-        maxHeight: '90%',
-        maxWidth: '90%'
-      });
-    }
-  });
+  const countRows = Math.ceil(
+    $('#imagesModal').find('div.all-images>img').length / layoutNumber
+  );
+  const layoutStr = new Array(countRows).fill(layoutNumber).join('');
+  $('#imagesModal')
+    .find('div.all-images')
+    .photosetGrid({
+      highresLinks: true,
+      rel: 'withhearts-gallery',
+      gutter: '2px',
+      layout: layoutStr,
+      onComplete: function() {
+        $('.all-images').css({
+          visibility: 'visible'
+        });
+        $('.all-images a').colorbox({
+          photo: true,
+          scalePhotos: true,
+          maxHeight: '90%',
+          maxWidth: '90%'
+        });
+      }
+    });
 }
 
 function showButtonGroupChat() {
@@ -115,20 +129,26 @@ function showButtonGroupChat() {
 }
 
 function addFriendsToGroup() {
-  $('ul#group-chat-friends').find('div.add-user').bind('click', function() {
-    let uid = $(this).data('uid');
-    $(this).remove();
-    let html = $('ul#group-chat-friends').find('div[data-uid=' + uid + ']').html();
+  $('ul#group-chat-friends')
+    .find('div.add-user')
+    .bind('click', function() {
+      const uid = $(this).data('uid');
+      $(this).remove();
+      const html = $('ul#group-chat-friends')
+        .find(`div[data-uid=${uid}]`)
+        .html();
 
-    let promise = new Promise(function(resolve, reject) {
-      $('ul#friends-added').append(html);
-      $('#groupChatModal .list-user-added').show();
-      resolve(true);
+      const promise = new Promise(function(resolve, reject) {
+        $('ul#friends-added').append(html);
+        $('#groupChatModal .list-user-added').show();
+        resolve(true);
+      });
+      promise.then(function(success) {
+        $('ul#group-chat-friends')
+          .find(`div[data-uid=${uid}]`)
+          .remove();
+      });
     });
-    promise.then(function(success) {
-      $('ul#group-chat-friends').find('div[data-uid=' + uid + ']').remove();
-    });
-  });
 }
 
 function cancelCreateGroup() {
@@ -154,7 +174,7 @@ $(document).ready(function() {
   nineScrollRight();
 
   // Bật emoji, tham số truyền vào là id của box nhập nội dung tin nhắn
-  enableEmojioneArea("17071995");
+  enableEmojioneArea('17071995');
 
   // Icon loading khi chạy ajax
   ajaxLoading();
@@ -171,4 +191,6 @@ $(document).ready(function() {
 
   // Action hủy việc tạo nhóm trò chuyện
   cancelCreateGroup();
+
+  flashMasterNotify();
 });
