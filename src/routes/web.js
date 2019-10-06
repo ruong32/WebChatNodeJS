@@ -10,12 +10,17 @@ initPassportLocal();
 const router = express.Router();
 
 const initRoutes = app => {
-  router.get('/', home.getHome);
-  router.get('/login-register', auth.getLoginRegister);
-  router.post('/register', authValid.register, auth.postRegister);
-  router.get('/verify/:token', auth.verifyAccount);
+  router.get('/login-register', auth.checkLogout, auth.getLoginRegister);
+  router.post(
+    '/register',
+    auth.checkLogout,
+    authValid.register,
+    auth.postRegister
+  );
+  router.get('/verify/:token', auth.checkLogout, auth.verifyAccount);
   router.post(
     '/login',
+    auth.checkLogout,
     passport.authenticate('local', {
       successRedirect: '/',
       failureRedirect: '/login-register',
@@ -23,6 +28,8 @@ const initRoutes = app => {
       failureFlash: true
     })
   );
+  router.get('/', auth.checkLogin, home.getHome);
+  router.get('/logout', auth.checkLogin, auth.getLogout);
 
   return app.use('/', router);
 };
