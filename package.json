@@ -32,6 +32,7 @@
     "eslint-plugin-prettier": "^3.1.1",
     "eslint-plugin-react": "^7.14.3",
     "eslint-plugin-react-hooks": "^1.7.0",
+    "pem": "^1.14.3",
     "prettier": "^1.18.2"
   },
   "dependencies": {
@@ -48,6 +49,8 @@
     "morgan": "^1.9.1",
     "nodemailer": "^4.4.2",
     "passport": "^0.4.0",
+    "passport-facebook": "^3.0.0",
+    "passport-google-oauth": "^2.0.0",
     "passport-local": "^1.0.0",
     "uuid": "^3.3.3"
   }
