@@ -3,9 +3,13 @@ import passport from 'passport';
 import { home, auth } from '../controllers/index';
 import { authValid } from '../validation/index';
 import initPassportLocal from '../controllers/passportController/local';
+import initPassportFB from '../controllers/passportController/facebook';
+import initPassportGG from '../controllers/passportController/google';
 
 // init all passport
 initPassportLocal();
+initPassportFB();
+initPassportGG();
 
 const router = express.Router();
 
@@ -28,6 +32,39 @@ const initRoutes = app => {
       failureFlash: true
     })
   );
+
+  router.get(
+    '/auth/facebook',
+    auth.checkLogout,
+    passport.authenticate('facebook', {
+      scope: ['email']
+    })
+  );
+  router.get(
+    '/auth/facebook/callback',
+    auth.checkLogout,
+    passport.authenticate('facebook', {
+      successRedirect: '/',
+      failureRedirect: '/login-register'
+    })
+  );
+
+  router.get(
+    '/auth/google',
+    auth.checkLogout,
+    passport.authenticate('google', {
+      scope: ['email']
+    })
+  );
+  router.get(
+    '/auth/google/callback',
+    auth.checkLogout,
+    passport.authenticate('google', {
+      successRedirect: '/',
+      failureRedirect: '/login-register'
+    })
+  );
+
   router.get('/', auth.checkLogin, home.getHome);
   router.get('/logout', auth.checkLogin, auth.getLogout);
 
