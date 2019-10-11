@@ -12,6 +12,7 @@
     "import/prefer-default-export": "off",
     "consistent-return": "warn",
     "no-async-promise-executor": "warn",
-    "no-underscore-dangle": "off"
+    "no-underscore-dangle": "off",
+    "prefer-const": "off"
   }
 }

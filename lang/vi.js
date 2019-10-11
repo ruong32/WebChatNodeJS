@@ -11,7 +11,9 @@ export const transErrors = {
   account_not_active: 'Email đã đăng ký nhưng chưa được kích hoạt!',
   token_null: 'Token không tồn tại!',
   login_failed: 'Sai tài khoản hoặc mật khẩu!',
-  server_error: 'Server toang cmnr!'
+  server_error: 'Server toang cmnr!',
+  avatar_type: 'Kiểu file không hợp lệ!',
+  avatar_size: 'Kích thước avatar không quá 1MB!'
 };
 
 export const transSuccess = {
@@ -22,7 +24,8 @@ export const transSuccess = {
   login_success: username => {
     return `Xin chào ${username}, chúc sức khỏe!`;
   },
-  logout_success: 'Đăng xuất thành công!'
+  logout_success: 'Đăng xuất thành công!',
+  avatar_updated: 'Cập nhật avatar thành công!'
 };
 
 export const transMail = {

@@ -63,8 +63,9 @@ const initPassportLocal = () => {
   });
 
   passport.deserializeUser((id, done) => {
-    const user = UserModel.findUserById(id);
-    return done(null, user);
+    UserModel.findById(id, (err, user) => {
+      return done(err, user);
+    });
   });
 };
 
