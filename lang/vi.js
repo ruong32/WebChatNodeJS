@@ -2,7 +2,11 @@ export const transValidation = {
   email_incorrect: 'Email không hợp lệ!',
   gender_incorrect: 'Gender kì lạ!',
   password_incorrect: 'Password chưa ổn!',
-  password_confirmation_incorrect: 'Password confirm hơi sai!'
+  password_confirmation_incorrect: 'Password confirm hơi sai!',
+  update_username: 'Xin đặt tên từ 3-17 ký tự và không có ký tự đặc biệt!',
+  update_gender: 'Bạn là dev hả?',
+  update_address: 'Địa chỉ từ 3-30 ký tự!',
+  update_phone: 'Số điện thoại bắt đầu bằng số 0 và có 10 ký tự!'
 };
 
 export const transErrors = {
@@ -25,7 +29,7 @@ export const transSuccess = {
     return `Xin chào ${username}, chúc sức khỏe!`;
   },
   logout_success: 'Đăng xuất thành công!',
-  avatar_updated: 'Cập nhật avatar thành công!'
+  info_updated: 'Cập nhật thông tin thành công!'
 };
 
 export const transMail = {
