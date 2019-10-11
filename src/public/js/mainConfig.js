@@ -25,7 +25,6 @@ function nineScrollRight() {
 function flashMasterNotify() {
   const notify = $('.master-success-message').text();
   if (notify.length) {
-    console.log(`ruong 123 ruong 123`);
     alertify.notify(notify, 'success', 7);
   }
 }
