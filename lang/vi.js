@@ -17,7 +17,9 @@ export const transErrors = {
   login_failed: 'Sai tài khoản hoặc mật khẩu!',
   server_error: 'Server toang cmnr!',
   avatar_type: 'Kiểu file không hợp lệ!',
-  avatar_size: 'Kích thước avatar không quá 1MB!'
+  avatar_size: 'Kích thước avatar không quá 1MB!',
+  user_not_found: 'Không tìm thấy người dùng!',
+  password_incorrect: 'Mật khẩu hiện tại không chính xác!'
 };
 
 export const transSuccess = {
@@ -29,7 +31,8 @@ export const transSuccess = {
     return `Xin chào ${username}, chúc sức khỏe!`;
   },
   logout_success: 'Đăng xuất thành công!',
-  info_updated: 'Cập nhật thông tin thành công!'
+  info_updated: 'Cập nhật thông tin thành công!',
+  password_updated: 'Cập nhật mật khẩu thành công!'
 };
 
 export const transMail = {

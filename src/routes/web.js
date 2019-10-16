@@ -75,6 +75,12 @@ const initRoutes = app => {
     userValid.updateInfo,
     user.updateInfo
   );
+  router.put(
+    '/user/update-password',
+    auth.checkLogin,
+    userValid.updatePassword,
+    user.updatePassword
+  );
 
   return app.use('/', router);
 };

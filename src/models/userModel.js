@@ -53,7 +53,7 @@ UserSchema.statics = {
     ).exec();
   },
   findUserById(id) {
-    return this.findById(id).exec;
+    return this.findById(id).exec();
   },
   findByFacebookUid(uid) {
     return this.findOne({ 'facebook.uid': uid }).exec();
@@ -63,6 +63,11 @@ UserSchema.statics = {
   },
   updateUser(id, item) {
     return this.findByIdAndUpdate(id, item).exec(); // return old item after updating
+  },
+  updatePassword(id, hashedPassword) {
+    return this.findByIdAndUpdate(id, {
+      'local.password': hashedPassword
+    }).exec();
   }
 };
 
