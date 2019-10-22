@@ -1,6 +1,6 @@
 import express from 'express';
 import passport from 'passport';
-import { home, auth, user } from '../controllers/index';
+import { home, auth, user, contact } from '../controllers/index';
 import { authValid, userValid } from '../validation/index';
 import initPassportLocal from '../controllers/passportController/local';
 import initPassportFB from '../controllers/passportController/facebook';
@@ -67,6 +67,18 @@ const initRoutes = app => {
 
   router.get('/', auth.checkLogin, home.getHome);
   router.get('/logout', auth.checkLogin, auth.getLogout);
+  router.get(
+    '/contact/find-users/:keyword',
+    auth.checkLogin,
+    contact.findUsers
+  );
+
+  router.post('/contact/add-new', auth.checkLogin, contact.addNew);
+  router.delete(
+    '/contact/remove-request-contact',
+    auth.checkLogin,
+    contact.removeReqCon
+  );
 
   router.put('/user/update-avatar', auth.checkLogin, user.updateAvatar);
   router.put(
