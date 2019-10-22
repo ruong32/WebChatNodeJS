@@ -298,7 +298,7 @@ $(document).ready(function() {
   $('#input-btn-update-user').bind('click', function() {
     if ($.isEmptyObject(userInfo) && !userAvatar) {
       alertify.notify(
-        'Bạn phải thay đổi thông tin trước khi cập nhật',
+        'Bạn phải thay đổi thông tin trước khi cập nhật!',
         'error',
         7
       );

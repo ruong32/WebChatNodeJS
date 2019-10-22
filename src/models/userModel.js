@@ -68,6 +68,33 @@ UserSchema.statics = {
     return this.findByIdAndUpdate(id, {
       'local.password': hashedPassword
     }).exec();
+  },
+  findUserForAdding(userFilter, searchKey) {
+    return this.find(
+      {
+        $and: [
+          { _id: { $nin: userFilter } },
+          { 'local.isActive': true },
+          {
+            $or: [
+              { username: { $regex: new RegExp(searchKey, 'i') } },
+              { 'local.email': { $regex: new RegExp(searchKey, 'i') } },
+              { 'facebook.email': { $regex: new RegExp(searchKey, 'i') } },
+              { 'google.email': { $regex: new RegExp(searchKey, 'i') } }
+            ]
+          }
+        ]
+      },
+      {
+        _id: 1,
+        username: 1,
+        address: 1,
+        avatar: 1,
+        'local.email': 1,
+        'facebook.email': 1,
+        'google.email': 1
+      }
+    ).exec();
   }
 };
 
