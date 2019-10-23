@@ -10,6 +10,7 @@ function addContact() {
           .find(`div.user-remove-request-contact[data-uid = ${targetId}]`)
           .css('display', 'inline-block');
         increaseNotification('count-request-contact-sent');
+        socket.emit('add-new-contact', { contactId: targetId });
       }
     });
   });
