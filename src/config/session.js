@@ -9,7 +9,7 @@ const sessionStore = new MongoStore({
   // autoRemove: "native"
 });
 
-const configSession = app => {
+const config = app => {
   app.use(
     session({
       key: 'express.sid',
@@ -24,4 +24,7 @@ const configSession = app => {
   );
 };
 
-module.exports = configSession;
+module.exports = {
+  config: config,
+  sessionStore: sessionStore
+};
