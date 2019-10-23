@@ -4,15 +4,13 @@ import {
   removeSocketIdFromArray
 } from '../../helpers/socketHelpers';
 
-let addNewContact = io => {
+let removeRequestContact = io => {
   let clients = {};
   io.on('connection', socket => {
     clients = pushSocketIdToArray(clients, socket.request.user._id, socket.id);
-    socket.on('add-new-contact', data => {
+    socket.on('remove-request-contact', data => {
       let currentUser = {
-        id: socket.request.user._id,
-        username: socket.request.user.username,
-        avatar: socket.request.user.avatar
+        id: socket.request.user._id
       };
 
       if (clients[data.contactId]) {
@@ -20,7 +18,7 @@ let addNewContact = io => {
           clients,
           data.contactId,
           io,
-          'respond-add-new-contact',
+          'respond-remove-request-contact',
           currentUser
         );
       }
@@ -35,4 +33,4 @@ let addNewContact = io => {
   });
 };
 
-module.exports = addNewContact;
+module.exports = removeRequestContact;

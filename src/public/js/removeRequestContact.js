@@ -15,7 +15,18 @@ function removeRequestContact() {
             .css('display', 'inline-block');
         }
         decreaseNotification('count-request-contact-sent');
+        socket.emit('remove-request-contact', { contactId: targetId });
       }
     });
   });
 }
+
+socket.on('respond-remove-request-contact', function(user) {
+  $('.noti_content')
+    .find(`span[data-uid=${user.id}]`)
+    .remove();
+  console.log(user.id);
+  decreaseNotification('count-request-contact-received');
+  decreaseNotificationNavbar('noti_contact_counter');
+  decreaseNotificationNavbar('noti_counter');
+});
