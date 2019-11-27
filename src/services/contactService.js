@@ -1,13 +1,12 @@
 import ContactModel from '../models/contactModel';
 import UserModel from '../models/userModel';
+import NotificationModel from '../models/notificationModel';
 
 let findUsers = (currentUserId, searchKey) => {
   return new Promise(async (resolve, reject) => {
     let usersContacted = await ContactModel.findAllUserById(currentUserId);
     let userFilter = [];
-    if (usersContacted) {
-      userFilter.push(usersContacted[0].userId);
-    }
+    userFilter.push(currentUserId);
     usersContacted.forEach(user => {
       userFilter.push(user.contactId);
     });
@@ -23,6 +22,14 @@ let addNew = (currentUserId, contactId) => {
       contactId: contactId
     };
     let newContact = await ContactModel.createNew(newContactItem);
+
+    // create notification
+    let notificationItem = {
+      senderId: currentUserId,
+      receiverId: contactId,
+      type: NotificationModel.types.ADD_CONTACT
+    };
+    await NotificationModel.model.createNew(notificationItem);
     resolve(newContact);
   });
 };
@@ -36,6 +43,8 @@ let removeReqCon = (currentUserId, contactId) => {
     if (removeReq.n === 0) {
       return reject(false);
     }
+    // remove notification
+
     resolve(true);
   });
 };
